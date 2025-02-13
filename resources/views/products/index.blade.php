@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="container">
-    <h1>Products</h1>
-    <a href="{{ route('products.create') }}" class="btn btn-primary">Create New Product</a>
+    <h1>Daftar Produk</h1>
+    <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Tambah Produk</a>
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Actions</th>
+                <th>Nama</th>
+                <th>Deskripsi</th>
+                <th>Harga</th>
+                <th>Kategori</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -22,11 +22,12 @@
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->category->name }}</td>
                 <td>
-                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a>
+                    <a href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm">Detail</a>
+                    <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                     </form>
                 </td>
             </tr>

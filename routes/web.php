@@ -6,7 +6,7 @@ use App\Http\Controllers\CategoryController;
 
 // Halaman Utama
 Route::get('/', function () {
-    return view('home'); // Tampilkan view home.blade.php
+    return redirect()->route('products.index'); // Redirect ke daftar produk
 });
 
 // Route untuk Produk
