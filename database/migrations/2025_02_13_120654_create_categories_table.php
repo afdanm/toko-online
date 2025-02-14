@@ -1,3 +1,5 @@
+
+
 <?php
 // filepath: /c:/laragon/www/toko-online/database/migrations/xxxx_xx_xx_xxxxxx_create_categories_table.php
 
@@ -7,27 +9,16 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCategoriesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+            $table->id(); // Kolom ID otomatis
+            $table->string('name'); // Kolom nama kategori
+            $table->timestamps(); // Kolom created_at dan updated_at
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
-        Schema::dropIfExists('categories');
-    }
-}
+        Schema::dropIfExists('categories'); // Menghapus tabel jika migration di-rollback
+    }}
