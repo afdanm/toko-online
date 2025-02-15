@@ -1,12 +1,12 @@
 
-// filepath: /c:/laragon/www/toko-online/resources/views/products/create.blade.php
+
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
     <h1>Tambah Produk Baru</h1>
     <a href="{{ route('products.index') }}" class="btn btn-secondary mb-3">Kembali</a>
-    <form action="{{ route('products.store') }}" method="POST">
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="name">Nama Produk</label>
@@ -38,6 +38,14 @@
                 @endforeach
             </select>
             @error('category_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <!-- Tambahkan input file untuk upload gambar -->
+        <div class="form-group">
+            <label for="image">Gambar Produk</label>
+            <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+            @error('image')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>

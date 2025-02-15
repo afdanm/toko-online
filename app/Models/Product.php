@@ -1,5 +1,5 @@
 <?php
-
+// filepath: /c:/laragon/www/toko-online/app/Models/Product.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +9,9 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'price', 'category_id'];
+    protected $fillable = [
+        'name', 'description', 'price', 'category_id', 'image'
+    ];
 
     public function category()
     {
