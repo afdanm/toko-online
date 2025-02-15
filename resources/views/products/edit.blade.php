@@ -4,7 +4,7 @@
 <div class="container">
     <h1>Edit Produk</h1>
     <a href="{{ route('products.index') }}" class="btn btn-secondary mb-3">Kembali</a>
-    <form action="{{ route('products.update', $product->id) }}" method="POST">
+    <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -39,6 +39,21 @@
             @error('category_id')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
+        </div>
+        <div class="form-group">
+            <label for="image">Gambar Produk</label>
+            <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+            @error('image')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label>Gambar Saat Ini</label>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid img-thumbnail" alt="Gambar Produk">
+                </div>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>

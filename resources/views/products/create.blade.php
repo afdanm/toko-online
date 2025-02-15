@@ -1,10 +1,8 @@
-
-
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
-    <h1>Tambah Produk Baru</h1>
+    <h1>Tambah Produk</h1>
     <a href="{{ route('products.index') }}" class="btn btn-secondary mb-3">Kembali</a>
     <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -41,7 +39,6 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
-        <!-- Tambahkan input file untuk upload gambar -->
         <div class="form-group">
             <label for="image">Gambar Produk</label>
             <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
@@ -49,7 +46,7 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
     </form>
 </div>
 @endsection

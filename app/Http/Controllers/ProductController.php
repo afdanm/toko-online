@@ -24,34 +24,31 @@ class ProductController extends Controller
     }
 
     // Menyimpan produk baru
-// filepath: /c:/laragon/www/toko-online/app/Http/Controllers/ProductController.php
-public function store(Request $request)
-{
-    // Validasi input
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'price' => 'required|numeric',
-        'category_id' => 'required|exists:categories,id',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi file gambar
-    ]);
+    public function store(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi file gambar
+        ]);
 
-    // Ambil data kecuali 'image'
-    $data = $request->except('image');
+        // Ambil data kecuali 'image'
+        $data = $request->except('image');
 
-    // Upload gambar jika ada
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('products', 'public'); // Simpan di folder 'storage/app/public/products'
-        $data['image'] = $imagePath;
+        // Upload gambar jika ada
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public'); // Simpan di folder 'storage/app/public/products'
+            $data['image'] = $imagePath;
+        }
+
+        // Simpan produk ke database
+        $product = Product::create($data);
+
+        return redirect()->route('products.index')->with('success', 'Produk berhasil ditambahkan.');
     }
-
-    // Simpan produk ke database
-    $product = Product::create($data);
-
-    // Log path gambar
-
-    return redirect()->route('products.index')->with('success', 'Produk berhasil ditambahkan.');
-}
 
     // Menampilkan detail produk
     public function show(Product $product)
