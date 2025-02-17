@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AuthController;
 
 // Halaman Utama
 Route::get('/', function () {
@@ -20,3 +21,21 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 
 // Route tambahan untuk menampilkan detail kategori (jika diperlukan)
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+
+
+
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
+Route::get('/register_admin', function () {
+    return view('auth.admin-register');
+});
+
+Route::get('/register_user', function () {
+    return view('auth.user-register');
+});
+
+Route::post('/register/admin', [AuthController::class, 'registerAdmin']);
+Route::post('/register/user', [AuthController::class, 'registerUser']);
+Route::post('/login', [AuthController::class, 'login']);
