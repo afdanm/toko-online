@@ -22,20 +22,19 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 // Route tambahan untuk menampilkan detail kategori (jika diperlukan)
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
-
-
+// Route untuk Autentikasi
 Route::get('/login', function () {
     return view('auth.login');
-});
+})->name('login');
 
 Route::get('/register_admin', function () {
     return view('auth.admin-register');
-});
+})->name('register_admin');
 
 Route::get('/register_user', function () {
-    return view('auth.user-register');
-});
+    return view('auth.register_user');
+})->name('register_user');
 
-Route::post('/register/admin', [AuthController::class, 'registerAdmin']);
-Route::post('/register/user', [AuthController::class, 'registerUser']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register/admin', [AuthController::class, 'registerAdmin'])->name('register.admin');
+Route::post('/register/user', [AuthController::class, 'registerUser'])->name('register.user');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');

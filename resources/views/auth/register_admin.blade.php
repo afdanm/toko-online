@@ -1,17 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Admin</title>
-</head>
-<body>
-    <form action="{{ url('/register/admin') }}" method="POST">
+
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h1>Register Admin</h1>
+    <form action="{{ route('register_admin') }}" method="POST">
         @csrf
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Register Admin</button>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
     </form>
-</body>
-</html>
+</div>
+@endsection

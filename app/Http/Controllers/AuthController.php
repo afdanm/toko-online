@@ -1,4 +1,7 @@
-<?
+<?php
+
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\User;
@@ -22,7 +25,8 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return response()->json(['message' => 'Admin registered successfully']);
+        // Redirect ke halaman tertentu setelah registrasi berhasil
+        return redirect()->route('home')->with('success', 'Admin registered successfully');
     }
 
     // Register User
@@ -42,7 +46,8 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return response()->json(['message' => 'User registered successfully']);
+        // Redirect ke halaman tertentu setelah registrasi berhasil
+        return redirect()->route('home')->with('success', 'User registered successfully');
     }
 
     // Login
@@ -54,13 +59,13 @@ class AuthController extends Controller
         ]);
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return response()->json(['message' => 'Admin logged in successfully']);
+            return redirect()->route('home')->with('success', 'Admin logged in successfully');
         }
 
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return response()->json(['message' => 'User logged in successfully']);
+            return redirect()->route('home')->with('success', 'User logged in successfully');
         }
 
-        return response()->json(['message' => 'Invalid credentials'], 401);
+        return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
     }
 }
