@@ -27,13 +27,13 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/register_admin', function () {
-    return view('auth.admin-register');
-})->name('register_admin');
+Route::get('/register/admin', function () {
+    return view('auth.register_admin');
+})->name('register.admin.form');
 
-Route::get('/register_user', function () {
+Route::get('/register/user', function () {
     return view('auth.register_user');
-})->name('register_user');
+})->name('register.user.form');
 
 Route::post('/register/admin', [AuthController::class, 'registerAdmin'])->name('register.admin');
 Route::post('/register/user', [AuthController::class, 'registerUser'])->name('register.user');
